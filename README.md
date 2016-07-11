@@ -2,6 +2,9 @@
 
 Bigger, Blacker cards can be used either as a standalone, command line program or as a web cgi script. You will need to have ruby, and the latest version of the prawn library installed to use it. It will also try to load the MS core fonts for the web from /usr/share/fonts/truetype/msttcorefonts, which is where they are by default after installing the "ttf-mscorefonts-installer" package on Debian-based distributions of linux.
 
+## Prequisites
+    gem install prawn
+
 In order to use the script as a cgi script, copy the index.html file to your web server root directory, and then copy bbcards.rb to cards.pdf under your web server root directory. Configure your web server to run cards.pdf as a cgi script, and it should work properly.
 
 Instructions for using the cgi script are included in the index.html file.
