@@ -35,8 +35,8 @@ MM_PER_INCH=25.4
 # PAPER_WIDTH  = (MM_PER_INCH*8.5).mm;
 
 PAPER_NAME   = "A3"
-PAPER_HEIGHT = 420.mm;
-PAPER_WIDTH  = 297.mm;
+PAPER_HEIGHT = (420).mm;
+PAPER_WIDTH  = (297).mm;
 
 
 def get_card_geometry(card_width_inches=2.0, card_height_inches=2.0, rounded_corners=false, one_card_per_page=false)
