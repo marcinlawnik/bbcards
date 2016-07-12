@@ -26,6 +26,8 @@
 
 require "prawn"
 require "prawn/measurement_extensions"
+require "rbconfig"
+include RbConfig
 
 
 MM_PER_INCH=25.4
@@ -391,15 +393,15 @@ def load_ttf_fonts(font_dir, font_families)
 		full_name = full_name.gsub(/\.ttf$/, "")
 		style = "normal"
 		name = full_name
-		if name.match(/_Bold_Italic$/)
+		if name.match(/[_\s]Bold[_\s]Italic$/)
 			style = "bold_italic"
-			name = name.gsub(/_Bold_Italic$/, "")
-		elsif name.match(/_Italic$/)
+			name = name.gsub(/[_\s]Bold[_\s]Italic$/, "")
+		elsif name.match(/[_\s]Italic$/)
 			style = "italic"
-			name = name.gsub(/_Italic$/, "")
-		elsif name.match(/_Bold$/)
-			style = "bold"	
-			name = name.gsub(/_Bold$/, "")
+			name = name.gsub(/[_\s]Italic$/, "")
+		elsif name.match(/[_\s]Bold$/)
+			style = "bold"
+			name = name.gsub(/[_\s]Bold$/, "")
 		end
 
 		name = name.gsub(/_/, " ");
@@ -495,7 +497,21 @@ def render_cards(directory=".", white_file="white.txt", black_file="black.txt", 
 			bottom_margin: card_geometry["margin_top"],
 			info: { :Title => title, :CreationDate => Time.now, :Producer => "Bigger, Blacker Cards", :Creator=>"Bigger, Blacker Cards" }
 			)
-		load_ttf_fonts("/usr/share/fonts/truetype/msttcorefonts", pdf.font_families)
+		case CONFIG['host_os']
+			when /mswin|windows/i
+				# Windows
+				load_ttf_fonts("C:\Windows\Fonts", pdf.font_families)
+		  when /linux|arch/i
+		    # Linux
+				load_ttf_fonts("/usr/share/fonts/truetype/msttcorefonts", pdf.font_families)
+		  when /sunos|solaris/i
+		    # Solaris
+			when /darwin/i
+				# MacOSX
+		    load_ttf_fonts("/Library/Fonts", pdf.font_families)
+		  else
+		    # whatever
+		end
 
 
 		white_pages.each_with_index do |statements, page|
