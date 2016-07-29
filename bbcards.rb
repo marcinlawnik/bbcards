@@ -137,7 +137,7 @@ end
 def render_card_page(pdf, card_geometry, icon, statements, is_black)
 	
 	pdf.font "Helvetica", :style => :normal
-	pdf.font_size = 14
+	pdf.font_size = 12
 	pdf.line_width(0.5);
 
 	
@@ -146,7 +146,7 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 			pdf.rectangle(pdf.bounds.top_left,pdf.bounds.width, pdf.bounds.height)
 		end
 
-		pdf.fill_and_stroke(:fill_color=>"000000", :stroke_color=>"000000") do
+		pdf.fill_and_stroke(:fill_color=>"211e1e", :stroke_color=>"211e1e") do
 			pdf.canvas do
 				pdf.rectangle(pdf.bounds.top_left,pdf.bounds.width, pdf.bounds.height)
 			end
@@ -154,8 +154,8 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 		pdf.stroke_color "ffffff"
 		pdf.fill_color "ffffff"
 	else
-		pdf.stroke_color "000000"
-		pdf.fill_color "000000"
+		pdf.stroke_color "211e1e"
+		pdf.fill_color "211e1e"
 	end
 
 	draw_grid(pdf, card_geometry)
@@ -216,7 +216,7 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 			parts = card_text.split(/\[\[/)
 			card_text = ""
 			first = true
-			previous_matches = false
+			# previous_matches = false
 			parts.each do |p|
 				n = p
 				this_matches=false
@@ -298,9 +298,9 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 				pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
 					pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+15.5],7.5)
 				end
-				pdf.stroke_color '000000'
-				pdf.fill_color '000000'
-				pdf.text_box "2", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
+				pdf.stroke_color '211e1e'
+				pdf.fill_color '211e1e'
+				pdf.text_box "2", color:"211e1e", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
 				pdf.stroke_color "ffffff"
 				pdf.fill_color "ffffff"
 			end
@@ -311,9 +311,9 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 				pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
 					pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+15.5],7.5)
 				end
-				pdf.stroke_color '000000'
-				pdf.fill_color '000000'
-				pdf.text_box "3", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
+				pdf.stroke_color '211e1e'
+				pdf.fill_color '211e1e'
+				pdf.text_box "3", color:"211e1e", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
 				pdf.stroke_color "ffffff"
 				pdf.fill_color "ffffff"
 
@@ -322,17 +322,17 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 				pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
 					pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+35.5],7.5)
 				end
-				pdf.stroke_color '000000'
-				pdf.fill_color '000000'
-				pdf.text_box "2", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+41]
+				pdf.stroke_color '211e1e'
+				pdf.fill_color '211e1e'
+				pdf.text_box "2", color:"211e1e", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+41]
 				pdf.stroke_color "ffffff"
 				pdf.fill_color "ffffff"
 			end
 		end
 	end
 	draw_logos(pdf, card_geometry, icon)
-	pdf.stroke_color "000000"
-	pdf.fill_color "000000"
+	pdf.stroke_color "211e1e"
+	pdf.fill_color "211e1e"
 
 end
 
