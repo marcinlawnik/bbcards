@@ -135,8 +135,9 @@ end
 
 
 def render_card_page(pdf, card_geometry, icon, statements, is_black)
-	
-	pdf.font "Helvetica", :style => :normal
+	pdf.font "helvetica-neue"
+	# pdf.font "Helvetica Neue", :style => :normal
+	#pdf.font(__dir__.concat("/fonts/HelveticaNeue.ttf"))
 	pdf.font_size = 12
 	pdf.line_width(0.5);
 
@@ -283,15 +284,19 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 
 
 			# Text
-			pdf.font "Helvetica", :style => :normal
+			pdf.font "helvetica-neue"
+			# pdf.font "Helvetica Neue", :style => :normal
+			#pdf.font(__dir__.concat("/fonts/HelveticaNeue.ttf"))
 
 			if is_pick3
 				pdf.text_box card_text.to_s, :overflow => :shrink_to_fit, :height =>card_geometry["card_height"]-55, :inline_format => true
 			else
 				pdf.text_box card_text.to_s, :overflow => :shrink_to_fit, :height =>card_geometry["card_height"]-35, :inline_format => true
 			end
-	
-			pdf.font "Helvetica", :style => :bold
+
+			pdf.font "helvetica-neue-bold"
+			# pdf.font "Helvetica Neue", :style => :bold
+			#pdf.font(__dir__.concat("/fonts/helvetica-neue-bold.ttf"))
 			#pick 2
 			if is_pick2
 				pdf.text_box "PICK", size:11, align: :right, width:30, at: [pdf.bounds.right-50,pdf.bounds.bottom+20]
@@ -497,13 +502,23 @@ def render_cards(directory=".", white_file="white.txt", black_file="black.txt", 
 			bottom_margin: card_geometry["margin_top"],
 			info: { :Title => title, :CreationDate => Time.now, :Producer => "Bigger, Blacker Cards", :Creator=>"Bigger, Blacker Cards" }
 			)
+
+		#add helvetica neue
+
+		# pdf.font_families.update(
+		# 		"Helvetica Neue" => {
+		# 				:bold        => "helvetica-neue-bold",
+		# 				:normal      => "helvetica-neue"
+		# 		})
 		case CONFIG['host_os']
 			when /mswin|windows/i
 				# Windows
 				load_ttf_fonts("C:\Windows\Fonts", pdf.font_families)
 		  when /linux|arch/i
 		    # Linux
-				load_ttf_fonts("/usr/share/fonts/truetype/msttcorefonts", pdf.font_families)
+				load_ttf_fonts("/usr/share/fonts", pdf.font_families)
+				load_ttf_fonts("/usr/share/fonts/truetype/msttcorefonts", pdf.font_families)#
+			# puts pdf.font_families
 		  when /sunos|solaris/i
 		    # Solaris
 			when /darwin/i
@@ -687,7 +702,8 @@ else
 	
 	if args.has_key? "help" or args.length == 0 or ( (not args.has_key? "white") and (not args.has_key? "black") and (not args.has_key? "dir") )
 		print_help
-	elsif args.has_key? "dir"
+  elsif args.has_key? "dir"
+    #puts __dir__.concat("/fonts/helvetica-neue-bold.ttf")
 		render_cards args["dir"], "white.txt", "black.txt", "icon.png", "cards.pdf", false, true, true, card_geometry, "", "", false
 	else
 		render_cards nil, args["white"], args["black"], args["icon"], args["output"], true, false, false, card_geometry, "", "", false
